@@ -9,6 +9,7 @@ use Hitocean\LaravelAuth\Auth\Actions\ResendVerificationEmailAction;
 use Hitocean\LaravelAuth\Auth\Actions\ResetPasswordAction;
 use Hitocean\LaravelAuth\Auth\Actions\VerifyUserAction;
 use Hitocean\LaravelAuth\Commands\LaravelAuthCommand;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -29,6 +30,10 @@ class LaravelAuthServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_laravel-auth_table')
             ->hasCommand(LaravelAuthCommand::class);
+
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName) => 'Hitocean\\LaravelDomicilio\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        );
     }
 
     public function packageRegistered()
