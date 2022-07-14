@@ -32,7 +32,7 @@ class LaravelAuthServiceProvider extends PackageServiceProvider
             ->hasCommand(LaravelAuthCommand::class);
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Hitocean\\LaravelDomicilio\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
