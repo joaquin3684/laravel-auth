@@ -6,5 +6,4 @@ use JeffGreco13\FilamentBreezy\Http\Livewire\Auth\Verify as FilamentBreezyVerify
 
 class Verify extends FilamentBreezyVerify
 {
-
 }

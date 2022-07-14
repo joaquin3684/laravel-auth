@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
-
-use Lorisleiva\Actions\Concerns\AsAction;
-
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
+
 use Hitocean\LaravelAuth\User\User\Requests\GetRolesRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetRolesAction
 {
@@ -27,6 +25,4 @@ class GetRolesAction
     {
         return $this->handle();
     }
-
-
 }

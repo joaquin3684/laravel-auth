@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\ResetPassword;
-
 
 use Hitocean\LaravelAuth\Auth\Actions\ForgotPasswordAction;
 use Hitocean\LaravelAuth\Auth\FormRequests\ForgotPasswordFormRequest;
@@ -10,7 +8,6 @@ use Tests\TestCase;
 
 class ForgotPasswordControllerTest extends TestCase
 {
-
     /** @test */
     public function assert_route_status_200()
     {
@@ -31,7 +28,7 @@ class ForgotPasswordControllerTest extends TestCase
     {
         $form = new ForgotPasswordFormRequest();
         $this->assertEquals([
-            'email' => 'required|email'
+            'email' => 'required|email',
         ], $form->rules());
     }
 

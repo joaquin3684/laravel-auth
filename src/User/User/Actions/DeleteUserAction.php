@@ -2,10 +2,10 @@
 
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
-use Lorisleiva\Actions\Concerns\AsAction;
-
 use Hitocean\LaravelAuth\User\User\Models\User;
+
 use Hitocean\LaravelAuth\User\User\Requests\DeleteUserRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class DeleteUserAction
 {
@@ -22,8 +22,6 @@ class DeleteUserAction
      */
     public function asController(DeleteUserRequest $request, int $id)
     {
-        \DB::transaction(fn() => $this->handle($id));
+        \DB::transaction(fn () => $this->handle($id));
     }
-
-
 }

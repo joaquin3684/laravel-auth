@@ -2,13 +2,13 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\StoreUser;
 
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\DTOS\StoreUserDTO;
 use Hitocean\LaravelAuth\User\User\Actions\StoreUserAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\ResourceHelpers\User\UserResourceHelperTest;
 use Tests\TestCase;
@@ -31,13 +31,13 @@ class StoreUserControllerTest extends TestCase implements UserMustBeAuthenticate
      */
     public function store_user($rol): void
     {
-        $data         = [
-            'name'     => $this->faker->name,
-            'email'    => $this->faker->name,
+        $data = [
+            'name' => $this->faker->name,
+            'email' => $this->faker->name,
             'password' => $this->faker->name,
-            'roles'    => [Roles::SUPER_ADMIN]
+            'roles' => [Roles::SUPER_ADMIN],
         ];
-        $user         = User::factory()->create();
+        $user = User::factory()->create();
         $expectedJson = UserResourceHelperTest::complete($user);
         $this->basicPostAssert(
             $data,
@@ -57,13 +57,13 @@ class StoreUserControllerTest extends TestCase implements UserMustBeAuthenticate
      */
     public function store_user_nullable($rol): void
     {
-        $data         = [
-            'name'     => $this->faker->name,
-            'email'    => $this->faker->name,
+        $data = [
+            'name' => $this->faker->name,
+            'email' => $this->faker->name,
             'password' => $this->faker->name,
-            'roles' => [Roles::SUPER_ADMIN]
+            'roles' => [Roles::SUPER_ADMIN],
         ];
-        $user         = User::factory()->create();
+        $user = User::factory()->create();
         $expectedJson = UserResourceHelperTest::complete($user);
         $this->basicPostAssert(
             $data,
@@ -106,10 +106,10 @@ class StoreUserControllerTest extends TestCase implements UserMustBeAuthenticate
         $request = new StoreUserRequest();
         $this->assertEquals(
             [
-                'name'     => 'required|string',
-                'email'    => 'required|string',
+                'name' => 'required|string',
+                'email' => 'required|string',
                 'password' => 'required|string',
-                'roles'    => 'required|array'
+                'roles' => 'required|array',
 
             ],
             $request->rules()
@@ -127,7 +127,4 @@ class StoreUserControllerTest extends TestCase implements UserMustBeAuthenticate
         Gate::shouldReceive('check')->with('store-user', 1)->andReturn(true);
         $this->assertTrue($request->authorize());
     }
-
-
 }
-

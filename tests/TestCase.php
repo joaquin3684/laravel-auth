@@ -2,16 +2,17 @@
 
 namespace Hitocean\LaravelAuth\Tests;
 
+use Hitocean\LaravelAuth\LaravelAuthServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Hitocean\LaravelAuth\LaravelAuthServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 
 class TestCase extends Orchestra
 {
     use WithFaker;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -42,8 +43,5 @@ class TestCase extends Orchestra
 
         $migration2 = include __DIR__ . '/../database/migrations/create_permission_tables.php.stub';
         $migration2->up();
-
-
-
     }
 }

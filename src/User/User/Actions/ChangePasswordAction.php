@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
-
 use Hash;
-use Lorisleiva\Actions\Concerns\AsAction;
 use Hitocean\LaravelAuth\User\User\Actions\DTOS\ChangePasswordDTO;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\ChangePasswordRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class ChangePasswordAction
 {
@@ -20,7 +18,6 @@ class ChangePasswordAction
         $user->password = Hash::make($dto->password);
         $user->name = 'carlos';
         $user->save();
-
     }
 
     /**
@@ -31,8 +28,6 @@ class ChangePasswordAction
     {
         $data = $request->all();
         $dto = new ChangePasswordDTO($data);
-        \DB::transaction(fn() => $this->handle($dto));
+        \DB::transaction(fn () => $this->handle($dto));
     }
-
-
 }

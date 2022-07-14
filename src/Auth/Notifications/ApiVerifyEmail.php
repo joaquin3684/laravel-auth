@@ -6,7 +6,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 
 class ApiVerifyEmail extends Notification
@@ -61,7 +60,7 @@ class ApiVerifyEmail extends Notification
      */
     protected function buildMailMessage($url)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->salutation(__('regards'))
             ->greeting(__('hello'))
             ->subject(__('verifyEmailSubject'))

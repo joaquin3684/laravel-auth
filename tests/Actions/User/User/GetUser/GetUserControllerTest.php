@@ -2,12 +2,12 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\GetUser;
 
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\GetUserAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\GetUserRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\ResourceHelpers\User\UserResourceHelperTest;
 use Tests\TestCase;
@@ -77,6 +77,4 @@ class GetUserControllerTest extends TestCase implements UserMustBeAuthenticated,
         Gate::shouldReceive('check')->with('get-user', 1)->andReturn(true);
         $this->assertTrue($request->authorize());
     }
-
-
 }

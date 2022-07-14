@@ -2,12 +2,12 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\ChangePassword;
 
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\ChangePasswordAction;
 use Hitocean\LaravelAuth\User\User\Actions\DTOS\ChangePasswordDTO;
 use Hitocean\LaravelAuth\User\User\Requests\ChangePasswordRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\TestCase;
 use Tests\UserMustBeAuthenticated;
@@ -15,7 +15,6 @@ use Tests\UserMustBeVerified;
 
 class ChangePasswordControllerTest extends TestCase implements UserMustBeAuthenticated, NeedsFormRequests, UserMustBeVerified
 {
-
     public function acceptedRoles()
     {
         return [
@@ -31,7 +30,7 @@ class ChangePasswordControllerTest extends TestCase implements UserMustBeAuthent
     {
         $data = [
             'password' => $this->faker->name,
-            'id' => 1
+            'id' => 1,
         ];
         $this->basicPutAssert(
             $data,
@@ -69,9 +68,9 @@ class ChangePasswordControllerTest extends TestCase implements UserMustBeAuthent
     /** @test */
     public function form_request_rules_are_correct()
     {
-        $request = new ChangePasswordRequest;
+        $request = new ChangePasswordRequest();
         $this->assertEquals([
-                                'password' => 'required|string'
+                                'password' => 'required|string',
 
                             ], $request->rules());
     }
@@ -86,5 +85,4 @@ class ChangePasswordControllerTest extends TestCase implements UserMustBeAuthent
         Gate::shouldReceive('check')->with('change-password', 1)->andReturn(true);
         $this->assertTrue($request->authorize());
     }
-
 }

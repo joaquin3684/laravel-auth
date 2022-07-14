@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\ResetPassword;
 
-
 use Database\Seeders\ResetPasswordSeeder;
+use Hitocean\LaravelAuth\Auth\Actions\ForgotPasswordAction;
+use Hitocean\LaravelAuth\User\User\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Notification;
-use Hitocean\LaravelAuth\Auth\Actions\ForgotPasswordAction;
-use Hitocean\LaravelAuth\User\User\Models\User;
 use Tests\TestCase;
 
 class ForgotPasswordActionTest extends TestCase

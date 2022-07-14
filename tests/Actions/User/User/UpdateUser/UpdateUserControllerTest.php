@@ -2,13 +2,13 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\UpdateUser;
 
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\DTOS\UpdateUserDTO;
 use Hitocean\LaravelAuth\User\User\Actions\UpdateUserAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\ResourceHelpers\User\UserResourceHelperTest;
 use Tests\TestCase;
@@ -33,10 +33,10 @@ class UpdateUserControllerTest extends TestCase implements UserMustBeAuthenticat
     {
         $user = User::factory()->create();
 
-        $data         = [
-            'id'       => $user->id,
-            'name'     => $this->faker->name,
-            'email'    => $this->faker->name,
+        $data = [
+            'id' => $user->id,
+            'name' => $this->faker->name,
+            'email' => $this->faker->name,
             'roles' => [$this->faker->name],
 
         ];
@@ -52,7 +52,6 @@ class UpdateUserControllerTest extends TestCase implements UserMustBeAuthenticat
             $user
         );
     }
-
 
     /** @test */
     public function user_must_be_authenticated_exception(): void
@@ -84,9 +83,9 @@ class UpdateUserControllerTest extends TestCase implements UserMustBeAuthenticat
         $request = new UpdateUserRequest();
         $this->assertEquals(
             [
-                'name'     => 'required|string',
-                'email'    => 'required|string',
-                'roles'    => 'required|array'
+                'name' => 'required|string',
+                'email' => 'required|string',
+                'roles' => 'required|array',
             ],
             $request->rules()
         );

@@ -20,11 +20,11 @@ class ResetPassword extends FilamentBreezyResetPassword
                                             'email' => $this->email,
                                             'password' => $data['password'],
                                         ], function ($user, $password) {
-                $user->password = Hash::make($password);
-                $user->setRememberToken(Str::random(60));
-                $user->save();
-                event(new PasswordReset($user));
-            });
+                                            $user->password = Hash::make($password);
+                                            $user->setRememberToken(Str::random(60));
+                                            $user->save();
+                                            event(new PasswordReset($user));
+                                        });
 
             if ($response == Password::PASSWORD_RESET) {
                 return redirect(route('filament.auth.login', ['email' => $this->email,'reset' => true]));
@@ -45,5 +45,4 @@ class ResetPassword extends FilamentBreezyResetPassword
             }
         }
     }
-
 }

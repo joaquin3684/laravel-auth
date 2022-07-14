@@ -1,15 +1,14 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
-
-use Lorisleiva\Actions\Concerns\AsAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\FindUserRequest;
 use Hitocean\LaravelAuth\User\User\Resources\UserResource;
+use Lorisleiva\Actions\Concerns\AsAction;
 
-class FindUserAction {
+class FindUserAction
+{
     use AsAction;
 
     /**
@@ -21,6 +20,7 @@ class FindUserAction {
     public function asController(FindUserRequest $request, int $id)
     {
         $user_id = $id === 'me' ? $request->user()->user->id : $id;
+
         return new UserResource($this->handle($user_id));
     }
 
@@ -28,6 +28,4 @@ class FindUserAction {
     {
         return User::findOrFail($id);
     }
-
-
 }

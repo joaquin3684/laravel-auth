@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Actions;
 
-
+use Hitocean\LaravelAuth\User\User\Models\User;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Hitocean\LaravelAuth\User\User\Models\User;
 
 class ResendVerificationEmailAction
 {
@@ -15,7 +13,7 @@ class ResendVerificationEmailAction
     public function handle($email)
     {
         $user = User::whereEmail($email)->first();
-        if($user && !$user->email_verified_at) {
+        if ($user && ! $user->email_verified_at) {
             $user->sendEmailVerificationNotification();
         }
     }

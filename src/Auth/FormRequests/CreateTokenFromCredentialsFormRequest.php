@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\FormRequests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
@@ -16,7 +14,6 @@ class CreateTokenFromCredentialsFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-
         return true;
     }
 
@@ -27,7 +24,7 @@ class CreateTokenFromCredentialsFormRequest extends FormRequest
 
      */
     #[ArrayShape(['password' => "string", 'email' => "string"])]
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'password' => 'required|string',

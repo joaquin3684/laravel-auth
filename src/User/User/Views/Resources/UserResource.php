@@ -4,7 +4,6 @@ namespace Hitocean\LaravelAuth\User\User\Views\Resources;
 
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -12,10 +11,10 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
+use Hitocean\LaravelAuth\User\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Hitocean\LaravelAuth\User\User\Models\User;
 use STS\FilamentImpersonate\Impersonate;
 
 class UserResource extends Resource
@@ -50,7 +49,7 @@ class UserResource extends Resource
                                           ->unique('users', 'email', fn (?User $record): ?User => $record),
                                  Forms\Components\MultiSelect::make('roles')
                                      ->options(Role::where('name', '<>', 'super_admin')->pluck('name', 'id'))
-                                                         ->required()
+                                                         ->required(),
                              ])
             );
     }
@@ -67,33 +66,31 @@ class UserResource extends Resource
                           Filter::make('roles')
                                 ->form([
                                            Forms\Components\Select::make('rol')
-                                                                  ->options(Role::where('name', '<>', 'super_admin')->pluck('name', 'id'))
+                                                                  ->options(Role::where('name', '<>', 'super_admin')->pluck('name', 'id')),
                                        ])
                                 ->query(function (Builder $query, array $data): Builder {
                                     return $query
                                         ->when(
                                             $data['rol'],
-                                            fn (Builder $query, $rol): Builder => $query->whereHas('roles', fn($q) => $q->where('id', $rol)),
+                                            fn (Builder $query, $rol): Builder => $query->whereHas('roles', fn ($q) => $q->where('id', $rol)),
                                         );
-                                })
+                                }),
                       ])
             ->prependActions([
                                  Impersonate::make('impersonate')->color('danger'), // <---
                                  Tables\Actions\IconButtonAction::make('cambiar_contraseña')
                                                                 ->icon("heroicon-o-key")
                                                                 ->color('warning')
-                                                                ->action(function (User $record, array $data): void
-                                                                {
+                                                                ->action(function (User $record, array $data): void {
                                                                     $record->update([
                                                                                         'password' => Hash::make(
                                                                                             $data['password']
-                                                                                        )
+                                                                                        ),
                                                                                     ]);
                                                                     Filament::notify(
                                                                         'success',
                                                                         'La contraseña fue modificada con exito'
                                                                     );
-
                                                                 })
                                                                 ->form([
                                                                            Forms\Components\TextInput::make('password')
@@ -112,7 +109,7 @@ class UserResource extends Resource
                                                                                                          "Repetir contraseña"
                                                                                                      )
                                                                                                      ->required()
-                                                                                                     ->password()
+                                                                                                     ->password(),
                                                                        ]),
                              ]);
     }
@@ -137,14 +134,14 @@ class UserResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        if($user = auth()->user())
-        {
-            if($user->hasRole('super_admin'))
+        if ($user = auth()->user()) {
+            if ($user->hasRole('super_admin')) {
                 return $query;
-            else
-                return $query->whereDoesntHave('roles', fn($q) => $q->where('name', 'super_admin'));
+            } else {
+                return $query->whereDoesntHave('roles', fn ($q) => $q->where('name', 'super_admin'));
+            }
         }
+
         return $query;
     }
-
 }

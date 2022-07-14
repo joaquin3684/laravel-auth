@@ -1,9 +1,9 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Requests;
-use Illuminate\Foundation\Http\FormRequest;
+
 use Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -15,7 +15,6 @@ class ChangePasswordRequest extends FormRequest
     public function authorize(): bool
     {
         return Gate::check('change-password', $this->user());
-
     }
 
     /**
@@ -23,7 +22,7 @@ class ChangePasswordRequest extends FormRequest
      * @return array
      *
      */
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'password' => 'required|string',

@@ -1,14 +1,10 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\CreateTokenFromCredentials;
 
-
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\Auth\Actions\CreateTokenFromCredentialsAction;
 use Hitocean\LaravelAuth\Auth\Actions\DTOS\CreateTokenFromCredentialsDTO;
 use Hitocean\LaravelAuth\Auth\FormRequests\CreateTokenFromCredentialsFormRequest;
-use Hitocean\LaravelAuth\User\User\Models\User;
 use Tests\TestCase;
 
 class CreateTokenFromCredentialsControllerTest extends TestCase
@@ -19,10 +15,9 @@ class CreateTokenFromCredentialsControllerTest extends TestCase
         $data = ['email' => $this->faker->email, 'password' => $this->faker->word];
         $dto = new CreateTokenFromCredentialsDTO($data);
 
-        CreateTokenFromCredentialsAction::partialMock()->shouldReceive('handle')->withArgs(fn($var) => $var == $dto)->andReturn('hola como estas');
+        CreateTokenFromCredentialsAction::partialMock()->shouldReceive('handle')->withArgs(fn ($var) => $var == $dto)->andReturn('hola como estas');
         $this->post('api/login', $data)
             ->assertJson(['token' => 'hola como estas']);
-
     }
 
     /** @test */
@@ -37,7 +32,7 @@ class CreateTokenFromCredentialsControllerTest extends TestCase
         $form = new CreateTokenFromCredentialsFormRequest();
         $this->assertEquals([
             'email' => 'required|string|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ], $form->rules());
     }
 
@@ -47,5 +42,4 @@ class CreateTokenFromCredentialsControllerTest extends TestCase
         $form = new CreateTokenFromCredentialsFormRequest();
         $this->assertTrue($form->authorize());
     }
-
 }

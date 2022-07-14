@@ -16,7 +16,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser, JWTSubject
 {
-    use HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -62,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, JWT
     {
         return [
             'user_id' => $this->id,
-            'roles' => $this->roles->map(fn(Role $role) => $role->name)->toArray()
+            'roles' => $this->roles->map(fn (Role $role) => $role->name)->toArray(),
         ];
     }
 

@@ -2,14 +2,14 @@
 
 namespace Hitocean\LaravelAuth\User\Role\Views\Pages;
 
+use function collect;
+use function config;
 use Filament\Resources\Pages\EditRecord;
+use Hitocean\LaravelAuth\User\Role\Views\Resources\RoleResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
-use Hitocean\LaravelAuth\User\Role\Views\Resources\RoleResource;
-use function collect;
-use function config;
 
 class EditRole extends EditRecord
 {
@@ -29,7 +29,7 @@ class EditRole extends EditRecord
     protected function afterSave(): void
     {
         $permissionModels = collect();
-        $this->permissions->each(function($permission) use($permissionModels) {
+        $this->permissions->each(function ($permission) use ($permissionModels) {
             $permissionModels->push(Permission::firstOrCreate(
                 ['name' => $permission],
                 ['guard_name' => config('filament.auth.guard')]

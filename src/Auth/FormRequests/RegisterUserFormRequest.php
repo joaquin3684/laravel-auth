@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\FormRequests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +20,7 @@ class RegisterUserFormRequest extends FormRequest
      * Get the validation rules that apply to the request.
      * @return array
      */
-    public function rules() : array
+    public function rules(): array
     {
         return [
             'password' => 'required|string|confirmed',

@@ -2,14 +2,15 @@
 
 namespace Hitocean\LaravelAuth\User\User\Mail;
 
+use Hitocean\LaravelAuth\User\User\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Hitocean\LaravelAuth\User\User\Models\User;
 
 class SetInitialPasswordMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -33,5 +34,4 @@ class SetInitialPasswordMail extends Mailable
                     ->to($this->user->email)
                     ->with('url', route('password.request'));
     }
-
 }

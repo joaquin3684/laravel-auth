@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\CreateTokenFromCredentials;
 
-
-use Hitocean\LaravelAuth\Tests\TestCase;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Hitocean\LaravelAuth\Auth\Actions\CreateTokenFromCredentialsAction;
 use Hitocean\LaravelAuth\Auth\Actions\DTOS\CreateTokenFromCredentialsDTO;
 use Hitocean\LaravelAuth\Auth\Exceptions\EmailVerificationException;
+use Hitocean\LaravelAuth\Tests\TestCase;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CreateTokenFromCredentialsActionTest extends TestCase
 {
@@ -19,13 +17,11 @@ class CreateTokenFromCredentialsActionTest extends TestCase
     {
         parent::setUp();
         $this->seed(CreateTokenFromCredentialsSeeder::class);
-
     }
 
     /** @test */
     public function succesfull_login_must_return_token()
     {
-
         $dto = new CreateTokenFromCredentialsDTO(
             email: 'joaquin@vadiun.com',
             password: 'joaquin'
