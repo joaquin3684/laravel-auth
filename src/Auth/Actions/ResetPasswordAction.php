@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Actions;
 
-
+use Hitocean\LaravelAuth\Auth\Actions\DTOS\ResetPasswordDTO;
+use Hitocean\LaravelAuth\Auth\FormRequests\ResetPasswordFormRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Hitocean\LaravelAuth\Auth\Actions\DTOS\ResetPasswordDTO;
-use Hitocean\LaravelAuth\Auth\FormRequests\ResetPasswordFormRequest;
 use Str;
 
 class ResetPasswordAction
@@ -23,11 +21,11 @@ class ResetPasswordAction
                 'email' => $dto->email,
                 'password' => $dto->password,
                 'password_confirmation' => $dto->password_confirmation,
-                'token' => $dto->token
+                'token' => $dto->token,
             ],
             function ($user, $password) {
                 $user->forceFill([
-                    'password' => Hash::make($password)
+                    'password' => Hash::make($password),
                 ])->setRememberToken(Str::random(60));
 
                 $user->save();
@@ -46,6 +44,7 @@ class ResetPasswordAction
     public function asController(ResetPasswordFormRequest $request)
     {
         $dto = new ResetPasswordDTO($request->all());
-        return \DB::transaction(fn() => $this->handle($dto));
+
+        return \DB::transaction(fn () => $this->handle($dto));
     }
 }

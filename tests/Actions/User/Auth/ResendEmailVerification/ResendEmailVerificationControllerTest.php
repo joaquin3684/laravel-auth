@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\ResendEmailVerification;
 
-
-use Hitocean\LaravelAuth\Auth\Actions\RegisterUserAction;
 use Hitocean\LaravelAuth\Auth\Actions\ResendVerificationEmailAction;
 use Tests\TestCase;
 
@@ -17,6 +14,5 @@ class ResendEmailVerificationControllerTest extends TestCase
 
         $response = $this->post('api/verify/resend', ['email' => "joaquinmazoud@gmail.com"]);
         $response->assertStatus(200);
-
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\FormRequests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,5 +23,4 @@ class ResetPasswordFormRequest extends FormRequest
             'email' => 'required|email',
         ];
     }
-
 }

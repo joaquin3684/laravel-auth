@@ -1,19 +1,16 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Actions;
 
-
-
+use Hitocean\LaravelAuth\Auth\Actions\DTOS\RegisterUserDTO;
+use Hitocean\LaravelAuth\Auth\FormRequests\RegisterUserFormRequest;
+use Hitocean\LaravelAuth\Auth\Notifications\ApiVerifyEmail;
+use Hitocean\LaravelAuth\User\Role\Enums\Roles;
+use Hitocean\LaravelAuth\User\User\Models\User;
+use Hitocean\LaravelAuth\User\User\Resources\UserResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Hitocean\LaravelAuth\Auth\Actions\DTOS\RegisterUserDTO;
-use Hitocean\LaravelAuth\Auth\Notifications\ApiVerifyEmail;
-use Hitocean\LaravelAuth\User\Role\Enums\Roles;
-use Hitocean\LaravelAuth\Auth\FormRequests\RegisterUserFormRequest;
-use Hitocean\LaravelAuth\User\User\Models\User;
-use Hitocean\LaravelAuth\User\User\Resources\UserResource;
 
 class RegisterUserAction
 {
@@ -24,7 +21,7 @@ class RegisterUserAction
         $user = User::create([
             'name' => $dto->name,
             'email' => $dto->email,
-            'password' => Hash::make($dto->password)
+            'password' => Hash::make($dto->password),
         ]);
         $user->assignRole([Roles::SUPER_ADMIN]);
 
@@ -45,9 +42,8 @@ class RegisterUserAction
     public function asController(RegisterUserFormRequest $request): UserResource
     {
         $dto = new RegisterUserDTO($request->all());
-        $user =  DB::transaction(fn() => $this->handle($dto));
+        $user = DB::transaction(fn () => $this->handle($dto));
+
         return new UserResource($user);
     }
-
-
 }

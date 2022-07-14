@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\ResetPassword;
 
-
 use Database\Seeders\ResetPasswordSeeder;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Hitocean\LaravelAuth\Auth\Actions\DTOS\ResetPasswordDTO;
 use Hitocean\LaravelAuth\Auth\Actions\ResetPasswordAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ResetPasswordActionTest extends TestCase

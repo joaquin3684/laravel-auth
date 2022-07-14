@@ -2,21 +2,19 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\DeleteUser;
 
-use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\DeleteUserAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\DeleteUserRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\TestCase;
 use Tests\UserMustBeAuthenticated;
 use Tests\UserMustBeVerified;
 
-class DeleteUserControllerTest extends TestCase implements UserMustBeAuthenticated, NeedsFormRequests, UserMustBeVerified {
-
+class DeleteUserControllerTest extends TestCase implements UserMustBeAuthenticated, NeedsFormRequests, UserMustBeVerified
+{
     public function acceptedRoles()
     {
         return [
@@ -61,17 +59,15 @@ class DeleteUserControllerTest extends TestCase implements UserMustBeAuthenticat
     /** @test */
     public function form_request_rules_are_correct()
     {
-        $request = new DeleteUserRequest;
+        $request = new DeleteUserRequest();
         $this->assertEquals([], $request->rules());
     }
 
     /** @test */
     public function form_request_authorization_is_true()
     {
-        $request = $this->partialMock(DeleteUserRequest::class, fn(MockInterface $m) => $m->shouldReceive('user')->andReturn(1));
+        $request = $this->partialMock(DeleteUserRequest::class, fn (MockInterface $m) => $m->shouldReceive('user')->andReturn(1));
         Gate::shouldReceive('check')->with('delete-user', 1)->andReturn(true);
         $this->assertTrue($request->authorize());
     }
-
-
 }

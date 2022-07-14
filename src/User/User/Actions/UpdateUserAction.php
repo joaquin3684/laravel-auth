@@ -3,12 +3,12 @@
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
 use DB;
-use Lorisleiva\Actions\Concerns\AsAction;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\DTOS\UpdateUserDTO;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\UpdateUserRequest;
 use Hitocean\LaravelAuth\User\User\Resources\UserResource;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class UpdateUserAction
 {
@@ -25,10 +25,11 @@ class UpdateUserAction
      */
     public function asController(UpdateUserRequest $request, int $id): UserResource
     {
-        $data       = $request->all();
+        $data = $request->all();
         $data['id'] = $id;
-        $dto        = new UpdateUserDTO($data);
-        $user       = DB::transaction(fn () => $this->handle($dto));
+        $dto = new UpdateUserDTO($data);
+        $user = DB::transaction(fn () => $this->handle($dto));
+
         return new UserResource($user);
     }
 
@@ -37,13 +38,14 @@ class UpdateUserAction
         $user = User::findOrFail($dto->id);
         $user->update(
             [
-                'name'  => $dto->name,
+                'name' => $dto->name,
                 'email' => $dto->email,
 
             ]
         );
         $user->roles()->detach();
         $user->assignRole(Roles::SUPER_ADMIN);
+
         return $user;
     }
 }

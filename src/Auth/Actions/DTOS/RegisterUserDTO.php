@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Actions\DTOS;
-
 
 use Spatie\DataTransferObject\DataTransferObject;
 

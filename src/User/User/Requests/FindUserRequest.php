@@ -1,12 +1,9 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Requests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use JetBrains\PhpStorm\ArrayShape;
 
 class FindUserRequest extends FormRequest
 {
@@ -24,7 +21,7 @@ class FindUserRequest extends FormRequest
      * Get the validation rules that apply to the request.
      * @return array
      */
-    public function rules() : array
+    public function rules(): array
     {
         return [
 

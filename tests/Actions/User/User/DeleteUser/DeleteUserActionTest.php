@@ -2,12 +2,12 @@
 
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\DeleteUser;
 
+use Hitocean\LaravelAuth\User\User\Actions\DeleteUserAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Tests\TestCase;
-use Hitocean\LaravelAuth\User\User\Actions\DeleteUserAction;
 
-class DeleteUserActionTest extends TestCase {
-
+class DeleteUserActionTest extends TestCase
+{
     /** @test */
     public function delete_user()
     {

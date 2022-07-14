@@ -17,20 +17,18 @@ class UpdateUserActionTest extends TestCase
 
         $dto = new UpdateUserDTO(
             [
-                'id'       => $user->id,
-                'name'     => $this->faker->name,
-                'email'    => $this->faker->name,
-                'roles' => [Roles::SUPER_ADMIN]
+                'id' => $user->id,
+                'name' => $this->faker->name,
+                'email' => $this->faker->name,
+                'roles' => [Roles::SUPER_ADMIN],
             ]
         );
         $user = UpdateUserAction::make()->handle($dto);
         $this->assertDatabaseHas('users', [
-            'name'     => $dto->name,
-            'email'    => $dto->email,
+            'name' => $dto->name,
+            'email' => $dto->email,
 
         ]);
         $this->assertTrue($user->hasRole(Roles::SUPER_ADMIN));
     }
-
-
 }

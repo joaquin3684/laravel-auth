@@ -1,25 +1,24 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\Auth\ResetPassword;
-
 
 use Hitocean\LaravelAuth\Auth\Actions\DTOS\ResetPasswordDTO;
 use Hitocean\LaravelAuth\Auth\Actions\ResetPasswordAction;
 use Hitocean\LaravelAuth\Auth\FormRequests\ResetPasswordFormRequest;
 use Tests\TestCase;
 
-class ResetPasswordControllerTest extends TestCase {
+class ResetPasswordControllerTest extends TestCase
+{
     /** @test */
     public function successfull_reset_password()
     {
         $data = [
-            'email'                 => 'joaquin@vadiun.com',
-            'password'              => 'pepemujica',
+            'email' => 'joaquin@vadiun.com',
+            'password' => 'pepemujica',
             'password_confirmation' => 'pepemujica',
-            'token'                 => 'alkdsjfñasdkjlfñakjga'
+            'token' => 'alkdsjfñasdkjlfñakjga',
         ];
-        $dto  = new ResetPasswordDTO($data);
+        $dto = new ResetPasswordDTO($data);
 
         ResetPasswordAction::partialMock()->shouldReceive('handle')->withArgs(fn ($arg) => $arg == $dto);
 
@@ -39,10 +38,10 @@ class ResetPasswordControllerTest extends TestCase {
         $form = new ResetPasswordFormRequest();
         $this->assertEquals(
             [
-                'token'                 => 'required',
+                'token' => 'required',
                 'password_confirmation' => 'required|string',
-                'password'              => 'required|confirmed',
-                'email'                 => 'required|email',
+                'password' => 'required|confirmed',
+                'email' => 'required|email',
             ],
             $form->rules()
         );

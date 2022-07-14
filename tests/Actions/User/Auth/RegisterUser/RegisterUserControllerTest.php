@@ -41,7 +41,6 @@ class RegisterUserControllerTest extends TestCase
              ->assertStatus(201);
     }
 
-
     /** @test */
     public function assert_form_request_rules_are_correct(): void
     {

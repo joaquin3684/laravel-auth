@@ -2,10 +2,10 @@
 
 namespace Hitocean\LaravelAuth\User\User\Actions;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Requests\GetUserRequest;
 use Hitocean\LaravelAuth\User\User\Resources\UserResource;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetUserAction
 {

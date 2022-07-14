@@ -1,9 +1,9 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\User\User\Requests;
-use Illuminate\Foundation\Http\FormRequest;
+
 use Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
 class GetRolesRequest extends FormRequest
 {
@@ -15,7 +15,6 @@ class GetRolesRequest extends FormRequest
     public function authorize(): bool
     {
         return Gate::check('get-roles', $this->user());
-
     }
 
     /**
@@ -23,7 +22,7 @@ class GetRolesRequest extends FormRequest
      * @return array
      *
      */
-    public function rules() : array
+    public function rules(): array
     {
         return [
 

@@ -11,14 +11,13 @@ use Tests\TestCase;
 
 class ChangePasswordActionTest extends TestCase
 {
-
     /** @test */
     public function change_password()
     {
         $user = User::factory()->withRole(Roles::SUPER_ADMIN)->create();
         $dto = new ChangePasswordDTO([
             'id' => $user->id,
-            'password' => 1234
+            'password' => 1234,
                                      ]);
         ChangePasswordAction::make()->handle($dto);
         $user = $user->fresh();

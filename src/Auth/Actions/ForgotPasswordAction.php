@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Actions;
 
-
+use Hitocean\LaravelAuth\Auth\FormRequests\ForgotPasswordFormRequest;
 use Illuminate\Support\Facades\Password;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Hitocean\LaravelAuth\Auth\FormRequests\ForgotPasswordFormRequest;
 
 class ForgotPasswordAction
 {

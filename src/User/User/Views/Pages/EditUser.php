@@ -5,9 +5,9 @@ namespace Hitocean\LaravelAuth\User\User\Views\Pages;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Pages\EditRecord;
-use Spatie\Permission\Models\Role;
 use Hitocean\LaravelAuth\User\User\Models\User;
 use Hitocean\LaravelAuth\User\User\Views\Resources\UserResource;
+use Spatie\Permission\Models\Role;
 
 class EditUser extends EditRecord
 {
@@ -33,7 +33,7 @@ class EditUser extends EditRecord
                                                                                                            'id'
                                                                                                        )
                                                                                                    )
-                                                                                                   ->required()
+                                                                                                   ->required(),
                                                       ])
             );
     }

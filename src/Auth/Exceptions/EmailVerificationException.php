@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Auth\Exceptions;
-
 
 class EmailVerificationException extends \Exception
 {

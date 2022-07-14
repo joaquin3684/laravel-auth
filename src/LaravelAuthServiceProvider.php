@@ -33,7 +33,7 @@ class LaravelAuthServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        Route::prefix('api')->group(function() {
+        Route::prefix('api')->group(function () {
             Route::post('login', [CreateTokenFromCredentialsAction::class, 'asController']);
             Route::post('register', [RegisterUserAction::class, 'asController']);
             Route::post('verify/resend', [ResendVerificationEmailAction::class, 'asController'])->name('verification.resend');

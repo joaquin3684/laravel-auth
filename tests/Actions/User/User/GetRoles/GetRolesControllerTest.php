@@ -1,23 +1,19 @@
 <?php
 
-
 namespace Hitocean\LaravelAuth\Tests\Actions\User\User\GetRoles;
 
-
-use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Gate;
-use Mockery\MockInterface;
 use Hitocean\LaravelAuth\User\Role\Enums\Roles;
 use Hitocean\LaravelAuth\User\User\Actions\GetRolesAction;
 use Hitocean\LaravelAuth\User\User\Requests\GetRolesRequest;
+use Illuminate\Support\Facades\Gate;
+use Mockery\MockInterface;
 use Tests\NeedsFormRequests;
 use Tests\TestCase;
 use Tests\UserMustBeAuthenticated;
 use Tests\UserMustBeVerified;
 
-class GetRolesControllerTest extends TestCase implements UserMustBeAuthenticated, NeedsFormRequests, UserMustBeVerified {
-
+class GetRolesControllerTest extends TestCase implements UserMustBeAuthenticated, NeedsFormRequests, UserMustBeVerified
+{
     public function acceptedRoles()
     {
         return [
@@ -61,17 +57,15 @@ class GetRolesControllerTest extends TestCase implements UserMustBeAuthenticated
     /** @test */
     public function form_request_rules_are_correct()
     {
-        $request = new GetRolesRequest;
+        $request = new GetRolesRequest();
         $this->assertEquals([], $request->rules());
     }
 
     /** @test */
     public function form_request_authorization_is_true()
     {
-        $request = $this->partialMock(GetRolesRequest::class, fn(MockInterface $m) => $m->shouldReceive('user')->andReturn(1));
+        $request = $this->partialMock(GetRolesRequest::class, fn (MockInterface $m) => $m->shouldReceive('user')->andReturn(1));
         Gate::shouldReceive('check')->with('get-roles', 1)->andReturn(true);
         $this->assertTrue($request->authorize());
     }
-
-
 }
