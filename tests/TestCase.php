@@ -1,36 +1,49 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Hitocean\LaravelAuth\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Hitocean\LaravelAuth\LaravelAuthServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use WithFaker;
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelAuthServiceProvider::class,
+            PermissionServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        Schema::dropAllTables();
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $a = config('permission.column_names');
+        $migration = include __DIR__.'/../database/migrations/create_users_table.php.stub';
         $migration->up();
-        */
+
+        $migration3 = include __DIR__.'/../database/migrations/create_password_resets_table.php.stub';
+        $migration3->up();
+
+        $migration2 = include __DIR__ . '/../database/migrations/create_permission_tables.php.stub';
+        $migration2->up();
+
+
+
     }
 }

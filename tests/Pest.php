@@ -1,5 +1,5 @@
 <?php
 
-use VendorName\Skeleton\Tests\TestCase;
+use Hitocean\LaravelAuth\Tests\TestCase;
 
-uses(TestCase::class)->in(__DIR__);
+uses(TestCase::class, \Illuminate\Foundation\Testing\WithFaker::class)->in(__DIR__);

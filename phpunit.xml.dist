@@ -19,8 +19,8 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="VendorName Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Hitocean Test Suite">
+            <directory>tests/Actions/User/Auth/RegisterUser</directory>
         </testsuite>
     </testsuites>
     <coverage>
@@ -36,4 +36,12 @@
     <logging>
         <junit outputFile="build/report.junit.xml"/>
     </logging>
+    <php>
+         <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="laravel_auth"/>
+        <env name="DB_USERNAME" value="root"/>
+        <env name="DB_PASSWORD" value="password"/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="3306"/>
+    </php>
 </phpunit>
