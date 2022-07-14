@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 it('can register', function () {
     $roleAdmin = Role::create(['name' => Roles::SUPER_ADMIN]);
 
+    $user = \Hitocean\LaravelAuth\User\User\Models\User::factory()->create();
     $dto = new RegisterUserDTO(password: "hola", name: "joaquin", email: "joaquin@vadiun.com");
 
     Notification::fake();

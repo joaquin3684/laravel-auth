@@ -6,6 +6,7 @@ use Hitocean\LaravelAuth\LaravelAuthServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Permission\PermissionServiceProvider;
 
@@ -18,7 +19,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.Str::after($modelName, "Models\\").'Factory'
         );
     }
 

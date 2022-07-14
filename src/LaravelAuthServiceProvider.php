@@ -11,6 +11,7 @@ use Hitocean\LaravelAuth\Auth\Actions\VerifyUserAction;
 use Hitocean\LaravelAuth\Commands\LaravelAuthCommand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -32,7 +33,7 @@ class LaravelAuthServiceProvider extends PackageServiceProvider
             ->hasCommand(LaravelAuthCommand::class);
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Hitocean\\LaravelAuth\\Database\\Factories\\'.Str::after($modelName, "Models\\").'Factory'
         );
     }
 
